@@ -81,15 +81,9 @@ public class OthelloGame {
 
     }
     public boolean isGameOver() {
-        // 先检查当前玩家是否有合法落子
+        // 检查当前玩家是否有合法落子
         boolean currentHasMove = hasValidMove(currentPlayer);
-        if (currentHasMove) {
-            return false; // 当前玩家有落子，游戏继续
-        }
-
-        // 当前玩家无落子，检查对方玩家是否有落子
-        boolean opponentHasMove = hasValidMove(-currentPlayer);
-        return !opponentHasMove; // 双方都无落子，游戏结束
+        return !currentHasMove; // 当前玩家无合法落子，游戏结束
     }
 
     /**
