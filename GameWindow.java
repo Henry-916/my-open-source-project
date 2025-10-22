@@ -50,21 +50,20 @@ public class GameWindow extends JFrame {
                 int y = e.getY() / cellSize; // 行坐标（0-7）
 
                 // 尝试落子
-                // 尝试前先判断是否结束
-                if (game.isGameOver()) {
-                    // 游戏结束，显示结果
-                    String result = game.getGameResult();
-                    JOptionPane.showMessageDialog(GameWindow.this, result, "游戏结束", JOptionPane.INFORMATION_MESSAGE);
-                    // 结束后可关闭窗口或重置游戏（这里选择关闭）
-                    dispose(); // 关闭游戏窗口
-                    // 可选：重新显示主界面
-                    new SimpleGUI().setVisible(true);
-                }
                 boolean success = game.placePiece(x, y);
                 if (success) {
                     // 落子成功，更新界面
                     infoLabel.setText("当前：" + game.getCurrentPlayerText());
                     boardPanel.repaint(); // 重绘棋盘
+                    if (game.isGameOver()) {
+                        // 游戏结束，显示结果
+                        String result = game.getGameResult();
+                        JOptionPane.showMessageDialog(GameWindow.this, result, "游戏结束", JOptionPane.INFORMATION_MESSAGE);
+                        // 结束后可关闭窗口或重置游戏（这里选择关闭）
+                        dispose(); // 关闭游戏窗口
+                        // 可选：重新显示主界面
+                        new SimpleGUI().setVisible(true);
+                    }
                 } else {
                     // 落子无效，提示
                     JOptionPane.showMessageDialog(GameWindow.this, "此处不能落子！");
